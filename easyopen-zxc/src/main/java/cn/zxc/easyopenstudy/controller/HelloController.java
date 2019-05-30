@@ -57,7 +57,7 @@ configClient.setLimitManager(new ApiLimitManager(redisTemplate, new ApiLimitConf
 //        Map<String, String> appSecretStore = new HashMap<String, String>();
 //        appSecretStore.put("test", "123456");
 //        apiConfig.addAppSecret(appSecretStore);
-        apiConfig.setIgnoreValidate(true);
+//        apiConfig.setIgnoreValidate(true);
         apiConfig.setShowMonitor(true);
     }
 }
