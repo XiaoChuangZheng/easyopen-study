@@ -28,10 +28,10 @@ public class EasyopenStudyApplicationTests {
 
     @Test
     public void testHello() {
-        CommonRequest request = new CommonRequest("goods.get");
+        CommonRequest request = new CommonRequest("goods.list");
 // 请求参数
         Map<String, Object> param = new HashMap<>();
-        param.put("goodsName", "iphone6");
+//        param.put("goodsName", "iphone6");
         request.setParam(param);
 
 // 发送请求

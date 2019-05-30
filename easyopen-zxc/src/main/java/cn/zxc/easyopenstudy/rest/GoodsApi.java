@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.gitee.easyopen.annotation.Api;
 import com.gitee.easyopen.annotation.ApiService;
 import com.gitee.easyopen.doc.DataType;
+import com.gitee.easyopen.doc.annotation.ApiDoc;
 import com.gitee.easyopen.doc.annotation.ApiDocField;
 import com.gitee.easyopen.doc.annotation.ApiDocMethod;
 
@@ -15,6 +16,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.constraints.NotEmpty;
+
 import cn.zxc.easyopenstudy.module.Goods;
 
 /**
@@ -25,13 +28,14 @@ import cn.zxc.easyopenstudy.module.Goods;
  * @author zhengxiaochuang(zhengxiaochuang @ eefung.com)
  */
 @ApiService
-public class UserApi {
+@ApiDoc("商品管理")
+public class GoodsApi {
     @Api(name = "goods.get")
     @ApiDocMethod(description = "根据商品名称获取商品信息", params = {
         @ApiDocField(name = "goodsName", dataType = DataType.STRING, description = "商品名称", example = "iphone", required = true)
     })
     @RequestMapping(method = RequestMethod.GET)
-    public Goods getGoods(String goodsName) {
+    public Goods getGoods(@NotEmpty(message = "商品名称不能为空") String goodsName) {
         Goods goods = new Goods();
         goods.setName(goodsName);
         goods.setPrice(1);
@@ -40,14 +44,11 @@ public class UserApi {
     }
 
     @Api(name = "goods.list")
-    @ApiDocMethod(description = "根据商品名称获取商品列表", params = {
-        @ApiDocField(name = "goodsName", dataType = DataType.STRING, description = "商品名称", example = "iphone", required = true)
-    }, results = {
-        @ApiDocField(name = "goodsList", description = "商品列表", elementClass = Goods.class
-        )
-    })
+    @ApiDocMethod(description = "根据商品名称获取商品列表",
+        params = {@ApiDocField(name = "goodsName", dataType = DataType.STRING, description = "商品名称", example = "iphone", required = true)}
+        , results = {@ApiDocField(name = "goodsList", description = "商品列表", elementClass = Goods.class)})
     @RequestMapping(method = RequestMethod.GET)
-    public List<Goods> getGoodsList(String goodsName) {
+    public List<Goods> getGoodsList(@NotEmpty(message = "{goods.name.notEmpty}") String goodsName) {
         List<Goods> goodsList = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             Goods goods = new Goods();
